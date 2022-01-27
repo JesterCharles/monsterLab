@@ -65,7 +65,7 @@ public class LinkedList<T> implements List<T> {
 			return true;
 		}
 		
-		for (int i=1; i<size; i++) {
+		for (int i=0; i<size; i++) {
 			if (element.equals(runner.nextNode.data)) {
 				if (i<size-1) { //if element is not the tail
 					runner.data = runner.nextNode.data;
