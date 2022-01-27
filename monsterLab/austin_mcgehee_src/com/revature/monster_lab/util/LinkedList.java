@@ -50,19 +50,9 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public boolean remove(T element) {
-
-		if(element == null) {
-			return false;
-		}
 		
-		Node<T> temp = new Node<>(element);
-		Node<T> runner = head;
-		while(runner != null) {
-			if(runner == temp) {
-				runner.nextNode = null;
-				return true;
-			}
-		}
+		
+		
 		return false;
 	}
 
