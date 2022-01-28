@@ -1,7 +1,18 @@
 package com.revature.monster_lab.util;
 
+
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Serializable;
+
 import org.w3c.dom.Node;
 
+/**
+ * Generates a custom LinkedList
+ *
+ * @author      Charles Jester
+ * @since       1.0
+ */
 public class LinkedList<T> implements List<T> {
 	
 	private int size;
@@ -29,7 +40,7 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public boolean contains(T element) {
-
+		
 		Node<T> runner = head;
 		
 		while(runner != null) {
@@ -39,7 +50,6 @@ public class LinkedList<T> implements List<T> {
 			
 			runner = runner.nextNode;
 		}
-
 		
 		return false;
 	}
@@ -48,11 +58,37 @@ public class LinkedList<T> implements List<T> {
 	public boolean isEmpty() {
 		return size == 0;
 	}
-
-	@Override
+	
+	/**
+	 * 
+	 */
+	@Override // TODO Implement this method 
 	public boolean remove(T element) {
-		// TODO Auto-generated method stub
-		return false;
+		Node<T> prevNode = null;
+		Node<T> currentNode = head;
+		if (size == 0) {
+            return false;
+        }
+
+        for (int i = 0; i < size; i++) {
+
+            if ((currentNode.data == null && element == null) || (currentNode.data != null && currentNode.data.equals(element))) {
+
+                if (currentNode == head) {
+                    head = currentNode.nextNode;
+                } else {
+                    prevNode.nextNode = currentNode.nextNode;
+                }
+
+                size--;
+                return true;
+            }
+
+            prevNode = currentNode;
+            currentNode = currentNode.nextNode;
+        }
+
+        return false;
 	}
 
 	@Override
@@ -60,9 +96,30 @@ public class LinkedList<T> implements List<T> {
 		return size;
 	}
 
-	@Override
+	/**
+	 * This
+	 * 
+	 * @param index - zero-indexed linkedList location
+	 * @return - the value at the specified index if it exists
+	 * @throws IndexOutOfBoundsException
+	 */
+	@Override 
 	public T get(int index) {
-		// TODO Auto-generated method stub
+		
+		if(index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		
+		Node<T> currentNode = head;
+		for(int i = 0; i <= index; i++) {
+			if(i == index) {
+				return currentNode.data;
+			}
+			
+			currentNode = currentNode.nextNode;
+		}
+		
 		return null;
 	}
 

@@ -1,8 +1,9 @@
 package com.revature.monster_lab.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Scientist {
+public class Scientist implements Serializable {
 	
 	// Attributes/Variables
 	private String scientistId;
