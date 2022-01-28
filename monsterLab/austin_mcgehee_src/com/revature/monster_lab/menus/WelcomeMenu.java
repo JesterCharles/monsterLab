@@ -2,20 +2,26 @@ package com.revature.monster_lab.menus;
 
 import java.io.BufferedReader;
 
-public class WelcomeMenu extends Menu {
+import com.revature.monster_lab.util.MenuRouter;
+import static com.revature.monster_lab.util.AppState.shutdown;
 
-	public WelcomeMenu(String name, String route, BufferedReader consoleReader) {
-		super(name, route, consoleReader);
+public class WelcomeMenu extends Menu{
+
+
+
+	public WelcomeMenu(BufferedReader consoleReader, MenuRouter router) {
+		super("Welcome", "/welcome", consoleReader, router);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void render() throws Exception {
-		String userSelection = consoleReader.readLine();
 		
-		System.out.println(
+		System.out.print(
 				"Welcome to the Mosnter Laboratory!\n" + "1) Login\n" + "2) Register\n" + "3) Exits\n" + "> ");
-
 		
+		String userSelection = consoleReader.readLine();
+
 		switch (userSelection) {
 		case "1":
 			router.transfer("/login");
@@ -25,7 +31,6 @@ public class WelcomeMenu extends Menu {
 			break;
 		case "3":
 			shutdown();
-			// System.exit(0); BAD PRACTICE
 			break;
 		default:
 			System.out.println("What on earth are you trying to tell me to do?!?!");

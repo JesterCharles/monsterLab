@@ -3,7 +3,6 @@ package com.revature.monster_lab.util;
 import com.revature.monster_lab.menus.Menu;
 
 public class MenuRouter {
-	
 	private final LinkedList<Menu> menus;
 	
 	public MenuRouter() {
@@ -17,11 +16,10 @@ public class MenuRouter {
 	public void transfer(String route) throws Exception{
 		for(int i = 0; i < menus.size(); i++) {
 			Menu currentMenu = menus.get(i);
-			if(currentMenu.getRoute().equals(currentMenu)) {
+			if(currentMenu.getRoute().equals(route)) {
 				currentMenu.render();
 			}
 		}
 	}
 	
-
 }

@@ -11,7 +11,8 @@ public abstract class Menu {
 	protected BufferedReader consoleReader;
 	protected MenuRouter router;
 	
-	public Menu(String name, String route, BufferedReader consoleReader) {
+	
+	public Menu(String name, String route, BufferedReader consoleReader, MenuRouter router) {
 		super();
 		this.name = name;
 		this.route = route;
@@ -27,7 +28,5 @@ public abstract class Menu {
 	}
 	
 	public abstract void render() throws Exception;
-	
-	
 
 }
