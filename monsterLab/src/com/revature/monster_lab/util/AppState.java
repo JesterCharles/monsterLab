@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 
 import com.revature.monster_lab.menus.RegisterMenu;
 import com.revature.monster_lab.menus.WelcomeMenu;
+import com.revature.monster_lab.services.ScientistService;
 
 public class AppState {
 
@@ -16,8 +17,9 @@ public class AppState {
 		router = new MenuRouter();
 		BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 		
+		ScientistService scientistService = new ScientistService();
 		router.addMenu(new WelcomeMenu(consoleReader, router));
-		router.addMenu(new RegisterMenu(consoleReader, router));
+		router.addMenu(new RegisterMenu(consoleReader, router, scientistService));
 	}
 	
 	public void startup() {
