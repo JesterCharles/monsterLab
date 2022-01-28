@@ -52,6 +52,8 @@ public class LinkedList<T> implements List<T> {
 		if (size==1) {
 			if (runner.data.equals(element)) {
 				runner.data = null;
+				head = null;
+				tail = null;
 				size = 0;
 				return true;
 			}
@@ -75,6 +77,7 @@ public class LinkedList<T> implements List<T> {
 				}
 				//if element is the tail
 				runner.nextNode = null;
+				tail = runner;
 				size--;
 				return true;
 			} 
