@@ -13,10 +13,18 @@ public class TempDriver {
 		
 		System.out.println(myStringList.contains("Hello")); // true
 		System.out.println(myStringList.contains("There")); // true
-		System.out.println(myStringList.contains("AhHh"));  // true
+		System.out.println(myStringList.contains("AhHh"));  // false
 		System.out.println(myStringList.contains("General")); // true
 		System.out.println(myStringList.contains("Kenobi")); // true
 		
+		myStringList.remove("There");
+		myStringList.contains("There");
+		myStringList.add("There");		
+		myStringList.contains("There");
+		
+		
+		myStringList.get(1);
+		myStringList.get(0);
 	}
 
 }
