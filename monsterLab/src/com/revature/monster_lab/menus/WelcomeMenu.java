@@ -7,8 +7,6 @@ import static com.revature.monster_lab.util.AppState.shutdown;
 
 public class WelcomeMenu extends Menu{
 
-
-
 	public WelcomeMenu(BufferedReader consoleReader, MenuRouter router) {
 		super("Welcome", "/welcome", consoleReader, router);
 		// TODO Auto-generated constructor stub
