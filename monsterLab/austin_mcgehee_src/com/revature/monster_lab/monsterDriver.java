@@ -21,9 +21,7 @@ public class monsterDriver {
 	public static void main(String[] args) {
 		boolean isRunning = true;
 		while (isRunning) {
-			System.out.println(
-					"Welcome to the Mosnter Laboratory!\n" + "1) Login\n" + "2) Register\n" + "3) Exits\n" + "> ");
-
+			
 			// BufferedReader consoleReader = new BufferedReader(new
 			// InputStreamReader(System.in));
 
@@ -46,22 +44,7 @@ public class monsterDriver {
 //				Scientist example = new Scientist("Charles", "Jester", "JesterCharles@mail.com", "jestchar", "superPassword");
 //				System.out.println(example);
 
-				switch (userSelection) {
-				case "1":
-					System.out.println("The user selected login");
-					break;
-				case "2":
-					register();
-					break;
-				case "3":
-					System.out.println(("The user selected Exit! Now exiting...."));
-					isRunning = false;
-					// System.exit(0); BAD PRACTICE
-					break;
-				default:
-					System.out.println("What on earth are you trying to tell me to do?!?!");
-					break;
-				}
+				
 
 				System.out.println("User selected: " + userSelection);
 
