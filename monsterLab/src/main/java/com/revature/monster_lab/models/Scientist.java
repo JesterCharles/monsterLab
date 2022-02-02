@@ -1,8 +1,9 @@
 package com.revature.monster_lab.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Scientist {
+public class Scientist implements Serializable {
 	
 	// Attributes/Variables
 	private String scientistId;
@@ -90,7 +91,8 @@ public class Scientist {
 	public String toFileString() {
 		StringBuilder buildFileString = new StringBuilder();
 		
-		buildFileString.append(firstName).append(":")
+		buildFileString.append(scientistId).append(":")
+						.append(firstName).append(":")
 						.append(lastName).append(":")
 						.append(email).append(":")
 						.append(username).append(":")
