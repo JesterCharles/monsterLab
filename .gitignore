@@ -2,5 +2,8 @@ bin/
 resources/
 .metadata/
 *.class
+doc/
+target/
+*.properties
 /.classpath
 /.project
