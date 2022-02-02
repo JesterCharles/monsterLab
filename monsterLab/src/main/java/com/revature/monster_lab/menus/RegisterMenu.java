@@ -39,11 +39,7 @@ public class RegisterMenu extends Menu {
 				System.out.print("Password: ");
 				String password = consoleReader.readLine();
 
-//				System.out.printf("Provided by user: firstName: %s, lastName: %s, email: %s, username: %s, password: %s", firstName, lastName, email, username, password).println();
-
 				Scientist scientist = new Scientist(firstName, lastName, email, username, password);
-
-				System.out.printf("Provided by user: %s\n", scientist.toString()).println();
 
 				try {
 					scientistService.registerNewScientist(scientist);

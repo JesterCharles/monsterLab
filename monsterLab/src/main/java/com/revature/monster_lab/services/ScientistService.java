@@ -25,6 +25,7 @@ public class ScientistService {
 	
 	//TODO: Impelement authentication
 	public Scientist autenticateScientist(String username, String password) {
+		scientistDao.findByUsernameAndPassword(username, password);
 		return null;
 	}
 
