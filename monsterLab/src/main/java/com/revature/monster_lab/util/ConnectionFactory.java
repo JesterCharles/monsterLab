@@ -1,5 +1,8 @@
 package com.revature.monster_lab.util;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,6 +35,16 @@ public class ConnectionFactory {
 	
 	private ConnectionFactory() {
 		
+		// Using .properties for DB credentials (this is to obfuscate)
+		try {
+			prop.load(new FileReader("src/main/resources/db.properties"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static ConnectionFactory getInstance() {
@@ -40,13 +53,9 @@ public class ConnectionFactory {
 	
 	public Connection getConnection() {
 		Connection conn = null;
-		
-		String url = "jdbc:postgresql://monster-lab-db-server.postgres.database.azure.com:5432/postgres?currentSchema=monsterlab";
-		String admin = "postgres@monster-lab-db-server";
-		String password = "charlesP0";
-		
+
 		try {
-			conn = DriverManager.getConnection(url,admin,password);
+			conn = DriverManager.getConnection(prop.getProperty("url"),prop.getProperty("admin"),prop.getProperty("password"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

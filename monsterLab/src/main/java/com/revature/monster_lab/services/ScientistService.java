@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import com.revature.monster_lab.daos.ScientistDAO;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.models.Scientist;
+import com.revature.monster_lab.util.List;
 
 public class ScientistService {
 
@@ -21,6 +22,10 @@ public class ScientistService {
 		
 
 		return true;
+	}
+	
+	public List<Scientist> getAllScientists(){
+		return scientistDao.findAll();		
 	}
 	
 	//TODO: Impelement authentication

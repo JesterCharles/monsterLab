@@ -4,3 +4,4 @@ resources/
 *.class
 doc/
 target/
+*.properties
