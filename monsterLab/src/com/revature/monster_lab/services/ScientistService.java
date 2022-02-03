@@ -28,7 +28,7 @@ public class ScientistService {
 		return null;
 	}
 
-	public boolean isScientistValid(Scientist newScientist) {
+	private boolean isScientistValid(Scientist newScientist) {
 		if(newScientist == null) return false;
 		if(newScientist.getFirstName() == null || newScientist.getFirstName().trim().equals("")) return false;
 		if(newScientist.getLastName() == null || newScientist.getLastName().trim().equals("")) return false;

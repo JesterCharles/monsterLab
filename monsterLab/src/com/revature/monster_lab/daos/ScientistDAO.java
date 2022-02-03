@@ -11,7 +11,7 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 	@Override
 	public Scientist create(Scientist newScientist) {
 		
-		File scientistsFile = new File("resources/data.txt");
+		File scientistsFile = new File("/monsterLab/src/com/revature/resources/data.txt");
 		
 		try(FileWriter fileWriter = new FileWriter(scientistsFile, true);) {
 			fileWriter.write(newScientist.toFileString() + "\n");
