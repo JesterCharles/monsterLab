@@ -3,6 +3,8 @@ package com.revature.monster_lab.util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import com.revature.monster_lab.daos.ScientistDAO;
+import com.revature.monster_lab.menus.DashboardMenu;
 import com.revature.monster_lab.menus.LoginMenu;
 import com.revature.monster_lab.menus.RegisterMenu;
 import com.revature.monster_lab.menus.WelcomeMenu;
@@ -18,10 +20,12 @@ public class AppState {
 		router = new MenuRouter();
 		BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 		
-		ScientistService scientistService = new ScientistService();
+		ScientistDAO scientistDAO = new ScientistDAO();
+		ScientistService scientistService = new ScientistService(scientistDAO);
 		router.addMenu(new WelcomeMenu(consoleReader, router));
 		router.addMenu(new RegisterMenu(consoleReader, router, scientistService));
 		router.addMenu(new LoginMenu(consoleReader, router, scientistService));
+		router.addMenu(new DashboardMenu(consoleReader, router, scientistService));
 	}
 	
 	public void startup() {

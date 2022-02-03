@@ -1,6 +1,10 @@
+<<<<<<< HEAD:monsterLab/src/main/java/com/revature/monster_lab/util/LinkedList.java
 package com.revature.monster_lab.util;
 
 import org.w3c.dom.Node;
+=======
+package com.revature.monster_lab.util.collections;
+>>>>>>> 665ef3dfee88e1536dd38ed0be28ab370a40e0f8:monsterLab/src/main/java/com/revature/monster_lab/util/collections/LinkedList.java
 
 public class LinkedList<T> implements List<T> {
 
