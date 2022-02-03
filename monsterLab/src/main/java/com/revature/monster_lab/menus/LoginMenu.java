@@ -18,13 +18,13 @@ public class LoginMenu extends Menu {
 	public void render() throws Exception {
 		 System.out.println("Please enter your credentials for you account.");
 	     System.out.print("Username: ");
-	      String username = consoleReader.readLine();
-	      System.out.print("Password: ");
-	        String password = consoleReader.readLine();
+	     String username = consoleReader.readLine();
+	     System.out.print("Password: ");
+	     String password = consoleReader.readLine();
 	        
 	        // Implement an authentication and successful login:
 	     
-	        scientistService.autenticateScientist(username, password);
+	        System.out.println(scientistService.getAllScientists());
 	        
 	}
 
