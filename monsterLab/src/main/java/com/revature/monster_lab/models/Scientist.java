@@ -91,7 +91,8 @@ public class Scientist implements Serializable {
 	public String toFileString() {
 		StringBuilder buildFileString = new StringBuilder();
 		
-		buildFileString.append(firstName).append(":")
+		buildFileString.append(scientistId).append(":")
+						.append(firstName).append(":")
 						.append(lastName).append(":")
 						.append(email).append(":")
 						.append(username).append(":")
