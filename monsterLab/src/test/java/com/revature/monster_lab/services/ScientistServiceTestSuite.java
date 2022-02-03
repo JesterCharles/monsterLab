@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.revature.monster_lab.daos.ScientistDAO;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.models.Scientist;
 
@@ -14,7 +15,8 @@ public class ScientistServiceTestSuite {
 	
 	@Before
 	public void testPrep() {
-		sut = new ScientistService();
+		ScientistDAO scientistDAO = new ScientistDAO();
+		sut = new ScientistService(scientistDAO);
 	}
 	
 	@Test
@@ -52,10 +54,17 @@ public class ScientistServiceTestSuite {
 		
 	}
 	
-	//TODO: Figure out implementation
+	//TODO: Figure out implementation. CHARLES YOU DINGLEBERRY MOCK IT!!!!!!!
 	@Test
 	public void test_registerScientist_returnsTrue_givenValidScientist() {
+		// Arrange
+		Scientist validScientist = new Scientist("valid","valid","valid","valid","valid");
 		
+		// Act
+		Scientist actualResult = sut.registerNewScientist(validScientist);
+		
+		// Assert
+		Assert.assertNotNull(actualResult);
 	}
 
 	@Test(expected = InvalidRequestException.class)
