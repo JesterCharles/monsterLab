@@ -1,7 +1,9 @@
-package com.revature.monster_lab.menus;
+package com.revature.monster_lab.menus.dashboardMenus;
 
 import java.io.BufferedReader;
 
+import com.revature.monster_lab.menus.Menu;
+import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.services.ScientistService;
 import com.revature.monster_lab.util.MenuRouter;
 
@@ -17,30 +19,45 @@ public class DashboardMenu extends Menu {
 	@Override
 	public void render() throws Exception {
 
-		// TODO: Work on implementing sessions & dashboard functionality
-		
-		String menu = "1) View/edit my profile information\n" + 
-				"2) View/edit/create monsters\n" + 
-				"3) Logout\n" +
-				"> ";
+		Scientist sessionScientist = scientistService.getSessionScientist();
 
-		System.out.print(menu);
+		if (sessionScientist == null) {
+			System.out.println("You are not currently logged in! Rerouting to the login screen.....");
+			router.transfer("/login");
+			return;
+		}
 
-		String userSelection = consoleReader.readLine();
+		while (scientistService.isSessionActive()) {
+			System.out.println("Welcome " + sessionScientist.getUsername());
+			String menu = "1) View/edit my profile information\n" + 
+					"2) Edit/create monsters\n" +
+					"3) View my monsters\n" + 
+					"4) Logout\n" + 
+					 "> ";
 
-		switch (userSelection) {
-		case "1":
-			System.out.println("View/edit profile selected");
-			router.transfer("/user-profile-edit");
-			break;
-		case "2":
-			System.out.println("View/edit/create monsters selected");
-			break;
-		case "3":
-			// TODO: Implement logout of user account
-			break;
-		default:
-			System.out.println("The user made an invalid selection");
+			System.out.print(menu);
+
+			String userSelection = consoleReader.readLine();
+
+			switch (userSelection) {
+			case "1":
+				System.out.println("View/edit profile selected");
+				router.transfer("/user-profile-edit");
+				break;
+			case "2":
+				System.out.println("View/edit/create monsters selected");
+				router.transfer("/create-monster");
+				break;
+			case "3":
+				System.out.println("View My Monsters selected:");
+				router.transfer("/my-monsters");
+				break;
+			case "4":
+				scientistService.logout();
+				break;
+			default:
+				System.out.println("The user made an invalid selection");
+			}
 		}
 	}
 
