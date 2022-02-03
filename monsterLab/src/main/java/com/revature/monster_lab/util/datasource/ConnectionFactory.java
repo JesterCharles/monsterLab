@@ -1,4 +1,4 @@
-package com.revature.monster_lab.util;
+package com.revature.monster_lab.util.datasource;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,6 +27,7 @@ public class ConnectionFactory {
 	static {
 		try {
 			Class.forName("org.postgresql.Driver");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

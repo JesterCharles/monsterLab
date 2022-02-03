@@ -8,6 +8,7 @@ create table scientists(
 );
 
 select * from scientists;
+
 truncate table scientists ;
 drop table scientists;
 

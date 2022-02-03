@@ -1,11 +1,4 @@
-package com.revature.monster_lab.util;
-
-
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Serializable;
-
-import org.w3c.dom.Node;
+package com.revature.monster_lab.util.collections;
 
 /**
  * Generates a custom LinkedList
