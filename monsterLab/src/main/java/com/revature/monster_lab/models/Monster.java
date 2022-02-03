@@ -38,6 +38,15 @@ public class Monster {
 		this.creator = creator;
 	}
 
+	public Monster(String monsterName, String monsterType, String strength, String dexterity, String intelligence) {
+		super();
+		this.monsterName = monsterName;
+		this.monsterType = monsterType;
+		this.strength = strength;
+		this.dexterity = dexterity;
+		this.intelligence = intelligence;
+	}
+
 	public String getMonsterId() {
 		return monsterId;
 	}

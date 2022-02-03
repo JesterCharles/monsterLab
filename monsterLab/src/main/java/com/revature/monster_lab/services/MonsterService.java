@@ -1,6 +1,8 @@
 package com.revature.monster_lab.services;
 
 import com.revature.monster_lab.daos.MonsterDAO;
+import com.revature.monster_lab.exceptions.InvalidRequestException;
+import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Monster;
 import com.revature.monster_lab.util.collections.List;
 
@@ -15,8 +17,17 @@ public class MonsterService {
 	}
 	
 	// TODO: Monster Creation implementation
-	public Monster createMonster(Monster newMonster) {
-		return null;
+	public void createMonster(Monster newMonster) {
+		if(!isMonsterValid(newMonster)) {
+			throw new InvalidRequestException("The monster was provided invalid information");
+		}
+		
+		newMonster.setCreator(scientistService.getSessionScientist());
+		Monster createdMonster = monsterDAO.create(newMonster);
+		
+		if(createdMonster == null) {
+			throw new ResourcePersistenceException("The monster could not be persisted");
+		}
 	}
 	
 	private boolean isMonsterValid(Monster newMonster) {
