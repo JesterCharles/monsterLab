@@ -12,6 +12,8 @@ select * from scientists;
 truncate table scientists ;
 drop table scientists;
 
+delete from scientists where first_name = 'valid';
+
 create table monsters(
 	monster_id varchar check (monster_id <> ''),
 	monster_name varchar not null check (monster_name <> ''),
@@ -25,3 +27,4 @@ create table monsters(
 );
 select * from monsters;
 drop table monsters;
+

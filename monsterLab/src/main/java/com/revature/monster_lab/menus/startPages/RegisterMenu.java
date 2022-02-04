@@ -1,8 +1,9 @@
-package com.revature.monster_lab.menus;
+package com.revature.monster_lab.menus.startPages;
 
 import java.io.BufferedReader;
 
 import com.revature.monster_lab.exceptions.InvalidRequestException;
+import com.revature.monster_lab.menus.Menu;
 import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.services.ScientistService;
 import com.revature.monster_lab.util.MenuRouter;

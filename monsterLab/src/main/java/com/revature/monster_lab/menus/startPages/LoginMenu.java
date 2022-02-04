@@ -1,8 +1,9 @@
-package com.revature.monster_lab.menus;
+package com.revature.monster_lab.menus.startPages;
 
 import java.io.BufferedReader;
 
 import com.revature.monster_lab.exceptions.AuthenticationException;
+import com.revature.monster_lab.menus.Menu;
 import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.services.ScientistService;
 import com.revature.monster_lab.util.MenuRouter;
@@ -31,8 +32,7 @@ public class LoginMenu extends Menu {
 //	     System.out.println(test.get(0));
 	     // Implement an authentication and successful login:
 	     try {
-	    	 Scientist authenticatedUser = scientistService.authenticateScientist(username, password);
-	    	 System.out.println("Validated Login, matches user: " + authenticatedUser.getUsername());
+	    	 scientistService.authenticateScientist(username, password);
 	    	 router.transfer("/dashboard");
 	        } catch (AuthenticationException e) {
 	            System.out.println("Incorrect credentials provided! No matching user account found.");
