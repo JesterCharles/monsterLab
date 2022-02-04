@@ -4,34 +4,70 @@ import java.io.File;
 import java.io.FileWriter;
 
 import com.revature.monster_lab.daos.ScientistDAO;
+import com.revature.monster_lab.exceptions.AuthenticationException;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
+import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.List;
+import com.revature.monster_lab.util.collections.List;
 
 public class ScientistService {
 
-	private ScientistDAO scientistDao = new ScientistDAO();
+	private final ScientistDAO scientistDao;
+	private Scientist sessionScientist;
 	
-	public boolean registerNewScientist(Scientist newScientist) {
+	public ScientistService(ScientistDAO scientistDAO) {
+		this.scientistDao = scientistDAO;
+		this.sessionScientist = null;
+	}
+	
+	public Scientist getSessionScientist() {
+		return sessionScientist;
+	}
+	
+	public Scientist registerNewScientist(Scientist newScientist) {
 		if(!isScientistValid(newScientist)) {
 			throw new InvalidRequestException("Invalid user data provider");
 		}
 
-		// TODO: Write logic that verifies the new users information isn't duplicated int he system
-		scientistDao.create(newScientist);
+		boolean usernameAvailable = scientistDao.findByUsername(newScientist.getUsername()) == null;
+		boolean emailAvailable = scientistDao.findByEmail(newScientist.getEmail()) == null;
 		
-
-		return true;
+		if(!usernameAvailable || !emailAvailable) {
+			if(!usernameAvailable && emailAvailable) {
+				throw new ResourcePersistenceException("The provided username was already taken in the database");
+			} else if(usernameAvailable) {
+				throw new ResourcePersistenceException("The provided email was already taken in the database");
+			} else {
+				throw new ResourcePersistenceException("The provided username and email were already taken in the database");
+			}
+		}
+		
+		Scientist persistedScientist = scientistDao.create(newScientist);
+		
+		if(persistedScientist == null) {
+			throw new ResourcePersistenceException("The scientist could not be persisted");
+		}
+		
+		return persistedScientist;
 	}
 	
 	public List<Scientist> getAllScientists(){
-		return scientistDao.findAll();		
+		return scientistDao.findAll();	
 	}
 	
 	//TODO: Impelement authentication
-	public Scientist autenticateScientist(String username, String password) {
-		scientistDao.findByUsernameAndPassword(username, password);
-		return null;
+	public void authenticateScientist(String username, String password) {
+		
+		if(username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+			throw new InvalidRequestException("Either username or password is an invalid entry. Please try logging in again");
+		}
+		
+		Scientist authenticatedScientist = scientistDao.findByUsernameAndPassword(username, password);
+		
+		if(authenticatedScientist == null) {
+			throw new AuthenticationException("Unauthenticated user, information provided was not found in our database.");
+		}
+		sessionScientist = authenticatedScientist;
 	}
 
 	private boolean isScientistValid(Scientist newScientist) {
@@ -45,4 +81,11 @@ public class ScientistService {
 
 	}
 	
+	public void logout() {
+		sessionScientist = null;
+	}
+	
+	public boolean isSessionActive() {
+		return sessionScientist != null;
+	}
 }

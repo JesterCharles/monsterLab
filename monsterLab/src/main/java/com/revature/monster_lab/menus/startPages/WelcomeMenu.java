@@ -1,7 +1,8 @@
-package com.revature.monster_lab.menus;
+package com.revature.monster_lab.menus.startPages;
 
 import java.io.BufferedReader;
 
+import com.revature.monster_lab.menus.Menu;
 import com.revature.monster_lab.util.MenuRouter;
 import static com.revature.monster_lab.util.AppState.shutdown;
 
@@ -16,7 +17,7 @@ public class WelcomeMenu extends Menu{
 	public void render() throws Exception {
 		
 		System.out.print(
-				"Welcome to the Mosnter Laboratory!\n" + "1) Login\n" + "2) Register\n" + "3) Exits\n" + "> ");
+				"Welcome to the Monster Laboratory!\n" + "1) Login\n" + "2) Register\n" + "3) Exits\n" + "> ");
 		
 		String userSelection = consoleReader.readLine();
 
