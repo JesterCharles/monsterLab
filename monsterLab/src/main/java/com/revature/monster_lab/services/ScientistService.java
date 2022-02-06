@@ -13,9 +13,15 @@ import com.revature.monster_lab.util.collections.List;
 public class ScientistService {
 
 	private final ScientistDAO scientistDao;
+	private Scientist sessionScientist;
 	
 	public ScientistService(ScientistDAO scientistDAO) {
 		this.scientistDao = scientistDAO;
+		this.sessionScientist = null;
+	}
+	
+	public Scientist getSessionScientist() {
+		return sessionScientist;
 	}
 	
 	public Scientist registerNewScientist(Scientist newScientist) {
@@ -23,7 +29,19 @@ public class ScientistService {
 			throw new InvalidRequestException("Invalid user data provider");
 		}
 
-		// TODO: Write logic that verifies the new users information isn't duplicated int he system
+		boolean usernameAvailable = scientistDao.findByUsername(newScientist.getUsername()) == null;
+		boolean emailAvailable = scientistDao.findByEmail(newScientist.getEmail()) == null;
+		
+		if(!usernameAvailable || !emailAvailable) {
+			if(!usernameAvailable && emailAvailable) {
+				throw new ResourcePersistenceException("The provided username was already taken in the database");
+			} else if(usernameAvailable) {
+				throw new ResourcePersistenceException("The provided email was already taken in the database");
+			} else {
+				throw new ResourcePersistenceException("The provided username and email were already taken in the database");
+			}
+		}
+		
 		Scientist persistedScientist = scientistDao.create(newScientist);
 		
 		if(persistedScientist == null) {
@@ -38,7 +56,7 @@ public class ScientistService {
 	}
 	
 	//TODO: Impelement authentication
-	public Scientist authenticateScientist(String username, String password) {
+	public void authenticateScientist(String username, String password) {
 		
 		if(username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
 			throw new InvalidRequestException("Either username or password is an invalid entry. Please try logging in again");
@@ -49,7 +67,7 @@ public class ScientistService {
 		if(authenticatedScientist == null) {
 			throw new AuthenticationException("Unauthenticated user, information provided was not found in our database.");
 		}
-		return authenticatedScientist;
+		sessionScientist = authenticatedScientist;
 	}
 
 	public boolean isScientistValid(Scientist newScientist) {
@@ -63,4 +81,11 @@ public class ScientistService {
 
 	}
 	
+	public void logout() {
+		sessionScientist = null;
+	}
+	
+	public boolean isSessionActive() {
+		return sessionScientist != null;
+	}
 }
