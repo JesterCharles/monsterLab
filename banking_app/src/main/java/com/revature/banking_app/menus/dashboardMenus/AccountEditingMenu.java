@@ -38,7 +38,7 @@ public class AccountEditingMenu extends Menu {
 		
 		switch (userSelection) {
 		case "1": // deposit
-			System.out.print("Enter amount to DEPOSIT (Example >100.25\nor press \'q\' to return to the previous menu");
+			System.out.println("Enter amount to DEPOSIT: "+ account.getDollars()+"."+account.getCents()+"\nor press \'q\' to return to the previous menu");
 			String depositAmount = consoleReader.readLine();
 			if(userSelection.equals("q")) { router.transfer("/edit-account"); }
 			
@@ -69,7 +69,7 @@ public class AccountEditingMenu extends Menu {
 			router.transfer("/edit-acccount");
 			break;
 		case "2": // withdraw
-			System.out.print("Enter amount to Withdraw (Example >100.25\nor press \'q\' to return to the previous menu");
+			System.out.println("Enter amount to Withdraw: "+ account.getDollars()+"."+account.getCents()+"\nor press \'q\' to return to the previous menu");
 			String withdrawAmount = consoleReader.readLine();
 			if(userSelection.equals("q")) { router.transfer("/edit-account"); }
 			
