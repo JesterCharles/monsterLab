@@ -44,7 +44,8 @@ public class ConnectionFactory {
 	private ConnectionFactory() {
 		// Using .properties for DB credentials (this is to obfuscate)
 		try {
-			prop.load(new FileReader("src/main/resources/db.properties"));
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			prop.load(loader.getResourceAsStream("db.properties"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();  

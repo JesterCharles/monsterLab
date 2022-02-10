@@ -2,13 +2,13 @@ package com.revature.monster_lab.services;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.List;
 
 import com.revature.monster_lab.daos.ScientistDAO;
 import com.revature.monster_lab.exceptions.AuthenticationException;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.collections.List;
 
 
 // THIS IS PURELY BUSINESS LOGIC
