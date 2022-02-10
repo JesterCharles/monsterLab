@@ -10,11 +10,17 @@ import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.util.collections.List;
 
+
+// THIS IS PURELY BUSINESS LOGIC
+// WAT IT MEME?
+// Business validation steps. Is what's been entered appropriate or valid? It might call checks to the DAO
+// but never touch the database directly
 public class ScientistService {
 
 	private final ScientistDAO scientistDao;
 	private Scientist sessionScientist;
 	
+	// DI - Dependency Injection of the DAO
 	public ScientistService(ScientistDAO scientistDAO) {
 		this.scientistDao = scientistDAO;
 		this.sessionScientist = null;
