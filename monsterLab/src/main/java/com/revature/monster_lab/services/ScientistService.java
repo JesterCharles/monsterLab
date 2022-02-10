@@ -76,7 +76,7 @@ public class ScientistService {
 		if(newScientist.getLastName() == null || newScientist.getLastName().trim().equals("")) return false;
 		if(newScientist.getEmail() == null || newScientist.getEmail().trim().equals("")) return false;
 		if(newScientist.getUsername() == null || newScientist.getUsername().trim().equals("")) return false;
-		return newScientist.getPassword() != null || !newScientist.getPassword().trim().equals("");
+		return newScientist.getPassword() != null && !newScientist.getPassword().trim().equals("");
 
 
 	}

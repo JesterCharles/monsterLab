@@ -21,47 +21,60 @@ import java.util.Properties;
  */
 
 public class ConnectionFactory {
+	
+	// Singleton - it's eager singleton, because the object is Instantitated at declaration
 	private static final ConnectionFactory connectionFactory = new ConnectionFactory();
+	
+	// This is used for our database authentication, using the db.properties
 	private Properties prop = new Properties();
 	
+	// This is checking for the library to connect to our database
 	static {
 		try {
 			Class.forName("org.postgresql.Driver");
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			// Testing for Azure SQL
+			// Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	// Privatized Constructor 
 	private ConnectionFactory() {
-		
 		// Using .properties for DB credentials (this is to obfuscate)
 		try {
 			prop.load(new FileReader("src/main/resources/db.properties"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();  
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	
+	// This to request that SINGLE instance of the ConnectionFactory Object 
 	public static ConnectionFactory getInstance() {
 		return connectionFactory;
 	}
 	
+	
+	// Try and establish that connection
 	public Connection getConnection() {
 		Connection conn = null;
 
 		try {
+			
+			// Why are we using properties? Why not hard code?
+			// Don't want peopole to have access - obfuscation
+			// MAKE SURE TO PUT YOUR db.properties in your .gitignore!!!!!!
 			conn = DriverManager.getConnection(prop.getProperty("url"),prop.getProperty("admin"),prop.getProperty("password"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		return conn;
 	}

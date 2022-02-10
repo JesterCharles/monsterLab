@@ -18,5 +18,4 @@ public class ConnectionFactoryTestSuite {
 			e.printStackTrace();
 		}
 	}
-	
 }
