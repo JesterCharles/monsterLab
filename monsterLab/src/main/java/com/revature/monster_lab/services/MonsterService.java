@@ -35,7 +35,7 @@ public class MonsterService {
 		if(newMonster == null) return false;
 		if(newMonster.getMonsterName() == null || newMonster.getMonsterName().trim().equals("")) return false;
 		if(newMonster.getDexterity() == null || newMonster.getDexterity().trim().equals("") || Integer.valueOf(newMonster.getDexterity()) > 20 || Integer.valueOf(newMonster.getDexterity()) < 0) return false;
-		return newMonster.getIntelligence() != null || !newMonster.getIntelligence().trim().equals("");
+		return newMonster.getIntelligence() != null && !newMonster.getIntelligence().trim().equals("");
 	}
 	
 	public List<Monster> findMyMonsters(){

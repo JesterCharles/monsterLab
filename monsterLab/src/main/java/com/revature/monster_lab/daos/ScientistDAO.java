@@ -100,14 +100,21 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 	@Override
 	public Scientist create(Scientist newScientist) {
 
+		// Try-with-resources because the connection is AutoClosable
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+			// Set the PK value in java to be added to my data
+			// Unique 128-bit string
 			newScientist.setScientistId(UUID.randomUUID().toString());
 
+			// The ? are to be added later using the PreparedStatement objects
+			// .set{DataType}
 			String sql = "insert into scientists (scientist_id, first_name, last_name, email, username, password) values (?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
+			// Adjusted the PreparedStatement to appropriate fill in the ? and execute the
+			// SQL statement
 			ps.setString(1, newScientist.getScientistId());
 			ps.setString(2, newScientist.getFirstName());
 			ps.setString(3, newScientist.getLastName());
@@ -115,8 +122,10 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 			ps.setString(5, newScientist.getUsername());
 			ps.setString(6, newScientist.getPassword());
 
+			// Used ExecuteUpdate to perform DML (Insert, UPdate, Delete)
 			int rowsInserted = ps.executeUpdate();
 
+			// Checking that the update Inddeed occured
 			if (rowsInserted != 0) {
 				return newScientist;
 			}
@@ -165,7 +174,28 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 
 	@Override
 	public Scientist findById(String id) {
-		// TODO Auto-generated method stub
+
+		// Try-with-resources because the connection is AutoClosable
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			// The ? are to be added later using the PreparedStatement objects
+			// .set{DataType}
+			String sql = "select from scientists where scientist_id=?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			// Updaet our sql
+			ps.setInt(1, Integer.valueOf(id));
+
+			// Used ExecuteQuery for selection
+			ps.executeQuery();
+
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
