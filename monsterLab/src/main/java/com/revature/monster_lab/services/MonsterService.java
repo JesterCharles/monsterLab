@@ -23,12 +23,12 @@ public class MonsterService {
 			throw new InvalidRequestException("The monster was provided invalid information");
 		}
 		
-		newMonster.setCreator(scientistService.getSessionScientist());
-		Monster createdMonster = monsterDAO.create(newMonster);
+//		newMonster.setCreator(scientistService.getSessionScientist());
+//		Monster createdMonster = monsterDAO.create(newMonster);
 		
-		if(createdMonster == null) {
-			throw new ResourcePersistenceException("The monster could not be persisted");
-		}
+//		if(createdMonster == null) {
+//			throw new ResourcePersistenceException("The monster could not be persisted");
+//		}
 	}
 	
 	private boolean isMonsterValid(Monster newMonster) {
@@ -44,7 +44,7 @@ public class MonsterService {
 	}
 	
 	public List<Monster> findAllMonsters(){
-		return null;
+		return monsterDAO.findAll();
 	}
 
 }
