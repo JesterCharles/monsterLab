@@ -18,16 +18,10 @@ import com.revature.monster_lab.models.Scientist;
 public class ScientistService {
 
 	private final ScientistDAO scientistDao;
-	private Scientist sessionScientist;
 	
 	// DI - Dependency Injection of the DAO
 	public ScientistService(ScientistDAO scientistDAO) {
 		this.scientistDao = scientistDAO;
-		this.sessionScientist = null;
-	}
-	
-	public Scientist getSessionScientist() {
-		return sessionScientist;
 	}
 	
 	public Scientist registerNewScientist(Scientist newScientist) {
@@ -62,7 +56,7 @@ public class ScientistService {
 	}
 	
 	//TODO: Impelement authentication
-	public void authenticateScientist(String username, String password) {
+	public Scientist authenticateScientist(String username, String password) {
 		
 		if(username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
 			throw new InvalidRequestException("Either username or password is an invalid entry. Please try logging in again");
@@ -73,7 +67,7 @@ public class ScientistService {
 		if(authenticatedScientist == null) {
 			throw new AuthenticationException("Unauthenticated user, information provided was not found in our database.");
 		}
-		sessionScientist = authenticatedScientist;
+		return authenticatedScientist;
 	}
 
 	public boolean isScientistValid(Scientist newScientist) {
@@ -87,11 +81,4 @@ public class ScientistService {
 
 	}
 	
-	public void logout() {
-		sessionScientist = null;
-	}
-	
-	public boolean isSessionActive() {
-		return sessionScientist != null;
-	}
 }

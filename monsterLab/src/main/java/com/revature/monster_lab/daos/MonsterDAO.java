@@ -2,11 +2,15 @@ package com.revature.monster_lab.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 import com.revature.monster_lab.models.Monster;
+import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.util.datasource.ConnectionFactory;
 
 public class MonsterDAO implements CrudDAO<Monster> {
@@ -50,8 +54,39 @@ public class MonsterDAO implements CrudDAO<Monster> {
 
 	@Override
 	public List<Monster> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Monster> monsters = new LinkedList<>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "select * from monsters m join scientists s on m.creator_id = s.scientist_id";
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+
+			while (rs.next()) {
+				Scientist monsterCreator = new Scientist();
+
+				monsterCreator.setScientistId(rs.getString("scientist_id"));
+				monsterCreator.setFirstName(rs.getString("first_name"));
+				monsterCreator.setLastName(rs.getString("last_name"));
+				monsterCreator.setEmail(rs.getString("email"));
+				monsterCreator.setUsername(rs.getString("username"));
+
+				Monster monster = new Monster();
+
+				monster.setMonsterId(rs.getString("monster_id"));
+				monster.setMonsterName(rs.getString("monster_name"));
+				monster.setMonsterType(rs.getString("monster_type"));
+				monster.setStrength(rs.getString("strength"));
+				monster.setDexterity(rs.getString("dexterity"));
+				monster.setIntelligence(rs.getString("intelligence"));
+				monster.setCreator(monsterCreator);
+
+				monsters.add(monster);
+			}
+			 System.out.println("DAO is returning: " + monsters);
+			return monsters;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return monsters;
 	}
 
 	@Override
