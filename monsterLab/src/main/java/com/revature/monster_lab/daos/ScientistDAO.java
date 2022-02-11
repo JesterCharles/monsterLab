@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.collections.LinkedList;
-import com.revature.monster_lab.util.collections.List;
 import com.revature.monster_lab.util.datasource.ConnectionFactory;
 
 public class ScientistDAO implements CrudDAO<Scientist> {
@@ -180,15 +180,32 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 
 			// The ? are to be added later using the PreparedStatement objects
 			// .set{DataType}
-			String sql = "select from scientists where scientist_id=?";
+			String sql = "select * from scientists where scientist_id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			// Updaet our sql
-			ps.setInt(1, Integer.valueOf(id));
+			ps.setString(1, id);
 
-			// Used ExecuteQuery for selection
-			ps.executeQuery();
+			// Used ExecuteQuery for selection, and returns a table of what was selected
+			
+			// Result Set is using a HASHMAP!!!!!!!! WOOOOO :"D
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Scientist idScientist = new Scientist();
+				
+				// result set .getSTring or get{datatype} 
+				// 
+				idScientist.setScientistId(rs.getString("scientist_id"));
+				idScientist.setFirstName(rs.getString("first_name"));
+				idScientist.setLastName(rs.getString("last_name"));
+				idScientist.setEmail(rs.getString("email"));
+				idScientist.setUsername(rs.getString("username"));;
+				idScientist.setPassword(rs.getString("password"));
+				
+				return idScientist;	
+			}
 
 
 		} catch (SQLException e) {

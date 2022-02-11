@@ -1,6 +1,6 @@
 package com.revature.monster_lab.daos;
 
-import com.revature.monster_lab.util.collections.List;
+import java.util.List;
 
 public interface CrudDAO<T> {
 

@@ -3,16 +3,16 @@ package com.revature.monster_lab.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 import com.revature.monster_lab.models.Monster;
-import com.revature.monster_lab.util.collections.List;
 import com.revature.monster_lab.util.datasource.ConnectionFactory;
 
 public class MonsterDAO implements CrudDAO<Monster> {
-	
+
 	// TODO: Implement search by creatorID
-	public List<Monster> findMonsterByCreatorId(String id){
+	public List<Monster> findMonsterByCreatorId(String id) {
 		return null;
 	}
 
