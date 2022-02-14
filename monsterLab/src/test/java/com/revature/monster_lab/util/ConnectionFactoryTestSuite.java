@@ -1,11 +1,11 @@
-package com.revature.monster_lab.util;
+package test.java.com.revature.monster_lab.util;
 
 import java.sql.Connection;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.revature.monster_lab.util.datasource.ConnectionFactory;
+import main.java.com.revature.monster_lab.util.datasource.ConnectionFactory;
 
 public class ConnectionFactoryTestSuite {
 

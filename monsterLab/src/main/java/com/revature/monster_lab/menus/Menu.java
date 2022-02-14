@@ -1,8 +1,8 @@
-package com.revature.monster_lab.menus;
+package main.java.com.revature.monster_lab.menus;
 
 import java.io.BufferedReader;
 
-import com.revature.monster_lab.util.MenuRouter;
+import main.java.com.revature.monster_lab.util.MenuRouter;
 
 public abstract class Menu {
 	

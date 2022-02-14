@@ -1,4 +1,4 @@
-package com.revature.monster_lab.util.collections;
+package main.java.com.revature.monster_lab.util.collections;
 
 // Generics - they're used to help deal with multiple/varying datatypes
 public interface Collection<T> {

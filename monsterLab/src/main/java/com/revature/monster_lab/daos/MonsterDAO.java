@@ -1,13 +1,13 @@
-package com.revature.monster_lab.daos;
+package main.java.com.revature.monster_lab.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import com.revature.monster_lab.models.Monster;
-import com.revature.monster_lab.util.collections.List;
-import com.revature.monster_lab.util.datasource.ConnectionFactory;
+import main.java.com.revature.monster_lab.models.Monster;
+import main.java.com.revature.monster_lab.util.collections.List;
+import main.java.com.revature.monster_lab.util.datasource.ConnectionFactory;
 
 public class MonsterDAO implements CrudDAO<Monster> {
 	

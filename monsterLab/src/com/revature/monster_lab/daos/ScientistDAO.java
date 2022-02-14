@@ -3,8 +3,9 @@ package com.revature.monster_lab.daos;
 import java.io.File;
 import java.io.FileWriter;
 
-import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.List;
+import main.java.com.revature.monster_lab.daos.CrudDAO;
+import main.java.com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.util.collections.List;
 
 public class ScientistDAO implements CrudDAO<Scientist> {
 

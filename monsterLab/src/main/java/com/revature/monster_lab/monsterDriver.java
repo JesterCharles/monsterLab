@@ -1,6 +1,6 @@
-package com.revature.monster_lab;
+package main.java.com.revature.monster_lab;
 
-import com.revature.monster_lab.util.AppState;
+import main.java.com.revature.monster_lab.util.AppState;
 
 /*
  * MonsterLab is a place for Mad Scientists to come together and create powerful

@@ -1,4 +1,4 @@
-package com.revature.monster_lab.models;
+package main.java.com.revature.monster_lab.models;
 
 public class Monster {
 	private String monsterId;

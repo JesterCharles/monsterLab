@@ -1,10 +1,10 @@
-package com.revature.monster_lab.menus.startPages;
+package main.java.com.revature.monster_lab.menus.startPages;
 
 import java.io.BufferedReader;
 
-import com.revature.monster_lab.menus.Menu;
-import com.revature.monster_lab.util.MenuRouter;
-import static com.revature.monster_lab.util.AppState.shutdown;
+import main.java.com.revature.monster_lab.menus.Menu;
+import main.java.com.revature.monster_lab.util.MenuRouter;
+import static main.java.com.revature.monster_lab.util.AppState.shutdown;
 
 public class WelcomeMenu extends Menu{
 

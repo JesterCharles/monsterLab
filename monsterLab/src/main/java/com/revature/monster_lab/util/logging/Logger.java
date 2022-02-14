@@ -1,4 +1,4 @@
-package com.revature.monster_lab.util.logging;
+package main.java.com.revature.monster_lab.util.logging;
 
 import java.io.FileWriter;
 import java.io.IOException;

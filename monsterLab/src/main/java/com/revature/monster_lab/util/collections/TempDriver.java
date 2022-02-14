@@ -1,4 +1,4 @@
-package com.revature.monster_lab.util.collections;
+package main.java.com.revature.monster_lab.util.collections;
 
 public class TempDriver {
 

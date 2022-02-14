@@ -1,7 +1,7 @@
-package com.revature.monster_lab.util;
+package main.java.com.revature.monster_lab.util;
 
-import com.revature.monster_lab.menus.Menu;
-import com.revature.monster_lab.util.collections.LinkedList;
+import main.java.com.revature.monster_lab.menus.Menu;
+import main.java.com.revature.monster_lab.util.collections.LinkedList;
 
 public class MenuRouter {
 	private final LinkedList<Menu> menus;

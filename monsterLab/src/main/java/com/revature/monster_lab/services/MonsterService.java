@@ -1,10 +1,10 @@
-package com.revature.monster_lab.services;
+package main.java.com.revature.monster_lab.services;
 
-import com.revature.monster_lab.daos.MonsterDAO;
-import com.revature.monster_lab.exceptions.InvalidRequestException;
-import com.revature.monster_lab.exceptions.ResourcePersistenceException;
-import com.revature.monster_lab.models.Monster;
-import com.revature.monster_lab.util.collections.List;
+import main.java.com.revature.monster_lab.daos.MonsterDAO;
+import main.java.com.revature.monster_lab.exceptions.InvalidRequestException;
+import main.java.com.revature.monster_lab.exceptions.ResourcePersistenceException;
+import main.java.com.revature.monster_lab.models.Monster;
+import main.java.com.revature.monster_lab.util.collections.List;
 
 public class MonsterService {
 	

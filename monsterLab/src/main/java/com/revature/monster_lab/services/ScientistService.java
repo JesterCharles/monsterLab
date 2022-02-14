@@ -1,14 +1,14 @@
-package com.revature.monster_lab.services;
+package main.java.com.revature.monster_lab.services;
 
 import java.io.File;
 import java.io.FileWriter;
 
-import com.revature.monster_lab.daos.ScientistDAO;
-import com.revature.monster_lab.exceptions.AuthenticationException;
-import com.revature.monster_lab.exceptions.InvalidRequestException;
-import com.revature.monster_lab.exceptions.ResourcePersistenceException;
-import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.collections.List;
+import main.java.com.revature.monster_lab.daos.ScientistDAO;
+import main.java.com.revature.monster_lab.exceptions.AuthenticationException;
+import main.java.com.revature.monster_lab.exceptions.InvalidRequestException;
+import main.java.com.revature.monster_lab.exceptions.ResourcePersistenceException;
+import main.java.com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.util.collections.List;
 
 public class ScientistService {
 

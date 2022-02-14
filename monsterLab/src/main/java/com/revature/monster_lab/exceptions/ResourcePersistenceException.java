@@ -1,4 +1,4 @@
-package com.revature.monster_lab.exceptions;
+package main.java.com.revature.monster_lab.exceptions;
 
 public class ResourcePersistenceException extends RuntimeException {
 

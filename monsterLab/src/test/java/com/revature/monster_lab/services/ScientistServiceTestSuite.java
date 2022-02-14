@@ -1,4 +1,4 @@
-package com.revature.monster_lab.services;
+package test.java.com.revature.monster_lab.services;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -9,10 +9,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.revature.monster_lab.daos.ScientistDAO;
-import com.revature.monster_lab.exceptions.InvalidRequestException;
-import com.revature.monster_lab.exceptions.ResourcePersistenceException;
-import com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.daos.ScientistDAO;
+import main.java.com.revature.monster_lab.exceptions.InvalidRequestException;
+import main.java.com.revature.monster_lab.exceptions.ResourcePersistenceException;
+import main.java.com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.services.ScientistService;
 
 
 public class ScientistServiceTestSuite {

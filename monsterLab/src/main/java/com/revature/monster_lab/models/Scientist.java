@@ -1,4 +1,4 @@
-package com.revature.monster_lab.models;
+package main.java.com.revature.monster_lab.models;
 
 import java.io.Serializable;
 import java.util.Objects;

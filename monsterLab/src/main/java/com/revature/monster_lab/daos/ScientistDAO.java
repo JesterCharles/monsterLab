@@ -1,4 +1,4 @@
-package com.revature.monster_lab.daos;
+package main.java.com.revature.monster_lab.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.collections.LinkedList;
-import com.revature.monster_lab.util.collections.List;
-import com.revature.monster_lab.util.datasource.ConnectionFactory;
+import main.java.com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.util.collections.LinkedList;
+import main.java.com.revature.monster_lab.util.collections.List;
+import main.java.com.revature.monster_lab.util.datasource.ConnectionFactory;
 
 public class ScientistDAO implements CrudDAO<Scientist> {
 

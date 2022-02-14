@@ -1,9 +1,9 @@
-package com.revature.monster_lab.menus.dashboardMenus;
+package main.java.com.revature.monster_lab.menus.dashboardMenus;
 
 import java.io.BufferedReader;
 
-import com.revature.monster_lab.menus.Menu;
-import com.revature.monster_lab.util.MenuRouter;
+import main.java.com.revature.monster_lab.menus.Menu;
+import main.java.com.revature.monster_lab.util.MenuRouter;
 
 public class ViewMyMonster extends Menu {
 

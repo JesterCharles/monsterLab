@@ -1,11 +1,11 @@
-package com.revature.monster_lab.menus.dashboardMenus;
+package main.java.com.revature.monster_lab.menus.dashboardMenus;
 
 import java.io.BufferedReader;
 
-import com.revature.monster_lab.menus.Menu;
-import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.services.ScientistService;
-import com.revature.monster_lab.util.MenuRouter;
+import main.java.com.revature.monster_lab.menus.Menu;
+import main.java.com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.services.ScientistService;
+import main.java.com.revature.monster_lab.util.MenuRouter;
 
 public class DashboardMenu extends Menu {
 

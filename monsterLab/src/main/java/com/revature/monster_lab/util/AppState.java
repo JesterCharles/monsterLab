@@ -1,19 +1,19 @@
-package com.revature.monster_lab.util;
+package main.java.com.revature.monster_lab.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import com.revature.monster_lab.daos.MonsterDAO;
-import com.revature.monster_lab.daos.ScientistDAO;
-import com.revature.monster_lab.menus.dashboardMenus.DashboardMenu;
-import com.revature.monster_lab.menus.dashboardMenus.MonsterCreationMenu;
-import com.revature.monster_lab.menus.dashboardMenus.MonsterMenu;
-import com.revature.monster_lab.menus.startPages.LoginMenu;
-import com.revature.monster_lab.menus.startPages.RegisterMenu;
-import com.revature.monster_lab.menus.startPages.WelcomeMenu;
-import com.revature.monster_lab.services.MonsterService;
-import com.revature.monster_lab.services.ScientistService;
-import com.revature.monster_lab.util.logging.Logger;
+import main.java.com.revature.monster_lab.daos.MonsterDAO;
+import main.java.com.revature.monster_lab.daos.ScientistDAO;
+import main.java.com.revature.monster_lab.menus.dashboardMenus.DashboardMenu;
+import main.java.com.revature.monster_lab.menus.dashboardMenus.MonsterCreationMenu;
+import main.java.com.revature.monster_lab.menus.dashboardMenus.MonsterMenu;
+import main.java.com.revature.monster_lab.menus.startPages.LoginMenu;
+import main.java.com.revature.monster_lab.menus.startPages.RegisterMenu;
+import main.java.com.revature.monster_lab.menus.startPages.WelcomeMenu;
+import main.java.com.revature.monster_lab.services.MonsterService;
+import main.java.com.revature.monster_lab.services.ScientistService;
+import main.java.com.revature.monster_lab.util.logging.Logger;
 
 public class AppState {
 

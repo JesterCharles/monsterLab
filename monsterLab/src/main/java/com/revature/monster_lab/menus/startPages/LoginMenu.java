@@ -1,13 +1,13 @@
-package com.revature.monster_lab.menus.startPages;
+package main.java.com.revature.monster_lab.menus.startPages;
 
 import java.io.BufferedReader;
 
-import com.revature.monster_lab.exceptions.AuthenticationException;
-import com.revature.monster_lab.menus.Menu;
-import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.services.ScientistService;
-import com.revature.monster_lab.util.MenuRouter;
-import com.revature.monster_lab.util.collections.List;
+import main.java.com.revature.monster_lab.exceptions.AuthenticationException;
+import main.java.com.revature.monster_lab.menus.Menu;
+import main.java.com.revature.monster_lab.models.Scientist;
+import main.java.com.revature.monster_lab.services.ScientistService;
+import main.java.com.revature.monster_lab.util.MenuRouter;
+import main.java.com.revature.monster_lab.util.collections.List;
 
 public class LoginMenu extends Menu {
 
