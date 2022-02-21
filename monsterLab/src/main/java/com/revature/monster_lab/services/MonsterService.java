@@ -6,32 +6,40 @@ import com.revature.monster_lab.daos.MonsterDAO;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Monster;
+import com.revature.monster_lab.web.dto.MonsterRequest;
+import com.revature.monster_lab.web.dto.MonsterResponse;
 
 public class MonsterService {
 	
 	private final MonsterDAO monsterDAO;
-	private final ScientistService scientistService;
 	
-	public MonsterService(MonsterDAO monsterDAO, ScientistService scientistService) {
+	public MonsterService(MonsterDAO monsterDAO) {
 		this.monsterDAO = monsterDAO;
-		this.scientistService = scientistService;
 	}
 	
-	// TODO: Monster Creation implementation
-	public void createMonster(Monster newMonster) {
-		if(!isMonsterValid(newMonster)) {
+	public boolean createMonster(MonsterRequest monsterRequest) {
+		if(!isMonsterValid(monsterRequest)) {
 			throw new InvalidRequestException("The monster was provided invalid information");
 		}
 		
-//		newMonster.setCreator(scientistService.getSessionScientist());
-//		Monster createdMonster = monsterDAO.create(newMonster);
+		Monster newMonster = new Monster(
+				monsterRequest.getMonsterName(), 
+				monsterRequest.getMosnterType(), 
+				monsterRequest.getStrength(), 
+				monsterRequest.getDexterity(), 
+				monsterRequest.getIntelligence()
+			);
 		
-//		if(createdMonster == null) {
-//			throw new ResourcePersistenceException("The monster could not be persisted");
-//		}
+		Monster createdMonster = monsterDAO.create(newMonster);
+		
+		if(createdMonster == null) {
+			throw new ResourcePersistenceException("The monster could not be persisted");
+		}
+		
+		return true;
 	}
 	
-	private boolean isMonsterValid(Monster newMonster) {
+	private boolean isMonsterValid(MonsterRequest newMonster) {
 		
 		if(newMonster == null) return false;
 		if(newMonster.getMonsterName() == null || newMonster.getMonsterName().trim().equals("")) return false;
@@ -39,12 +47,12 @@ public class MonsterService {
 		return newMonster.getIntelligence() != null && !newMonster.getIntelligence().trim().equals("");
 	}
 	
-	public List<Monster> findMyMonsters(){
+	public List<MonsterResponse> findMyMonsters(){
 		return null;
 	}
 	
-	public List<Monster> findAllMonsters(){
-		return monsterDAO.findAll();
+	public List<MonsterResponse> findAllMonsters(){
+		return null;
 	}
 
 }

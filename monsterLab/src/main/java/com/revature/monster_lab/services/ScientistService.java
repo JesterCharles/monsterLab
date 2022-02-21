@@ -9,6 +9,8 @@ import com.revature.monster_lab.exceptions.AuthenticationException;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
+import com.revature.monster_lab.web.dto.ScientistRequest;
+import com.revature.monster_lab.web.dto.ScientistResponse;
 
 
 // THIS IS PURELY BUSINESS LOGIC
@@ -24,10 +26,18 @@ public class ScientistService {
 		this.scientistDao = scientistDAO;
 	}
 	
-	public Scientist registerNewScientist(Scientist newScientist) {
-		if(!isScientistValid(newScientist)) {
+	public boolean registerNewScientist(ScientistRequest scientistRequest) {
+		if(!isScientistValid(scientistRequest)) {
 			throw new InvalidRequestException("Invalid user data provider");
 		}
+		
+		Scientist newScientist = new Scientist(
+				scientistRequest.getFirstName(), 
+				scientistRequest.getLastName(),
+				scientistRequest.getEmail(),
+				scientistRequest.getUsername(),
+				scientistRequest.getPassword()
+				);
 
 		boolean usernameAvailable = scientistDao.findByUsername(newScientist.getUsername()) == null;
 		boolean emailAvailable = scientistDao.findByEmail(newScientist.getEmail()) == null;
@@ -48,15 +58,16 @@ public class ScientistService {
 			throw new ResourcePersistenceException("The scientist could not be persisted");
 		}
 		
-		return persistedScientist;
+		return true;
 	}
 	
-	public List<Scientist> getAllScientists(){
-		return scientistDao.findAll();	
+	// TODO: refactor to responses
+	public List<ScientistResponse> getAllScientists(){
+		return null;	
 	}
 	
 	//TODO: Impelement authentication
-	public Scientist authenticateScientist(String username, String password) {
+	public ScientistResponse authenticateScientist(String username, String password) {
 		
 		if(username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
 			throw new InvalidRequestException("Either username or password is an invalid entry. Please try logging in again");
@@ -67,10 +78,10 @@ public class ScientistService {
 		if(authenticatedScientist == null) {
 			throw new AuthenticationException("Unauthenticated user, information provided was not found in our database.");
 		}
-		return authenticatedScientist;
+		return new ScientistResponse(authenticatedScientist);
 	}
 
-	public boolean isScientistValid(Scientist newScientist) {
+	public boolean isScientistValid(ScientistRequest newScientist) {
 		if(newScientist == null) return false;
 		if(newScientist.getFirstName() == null || newScientist.getFirstName().trim().equals("")) return false;
 		if(newScientist.getLastName() == null || newScientist.getLastName().trim().equals("")) return false;
