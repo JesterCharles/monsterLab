@@ -2,12 +2,29 @@ package com.revature.monster_lab.daos;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.revature.monster_lab.models.Scientist;
 
+
+@Repository
 public class ScientistDAO implements CrudDAO<Scientist> {
+	
+	private final SessionFactory sessionFactory;
+	
+	@Autowired
+	public ScientistDAO(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	public Scientist findByUsernameAndPassword(String username, String password) {
-		return null;
+		return sessionFactory.getCurrentSession()
+				.createQuery("from Scientist s where s.username = :username and s.password = :password", Scientist.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getSingleResult();
 	}
 
 	public Scientist findByEmail(String email) {
@@ -20,7 +37,8 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 
 	@Override
 	public Scientist create(Scientist newScientist) {
-		return null;
+		sessionFactory.getCurrentSession().save(newScientist);
+		return newScientist;
 	}
 
 	@Override

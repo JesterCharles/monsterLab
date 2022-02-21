@@ -1,14 +1,43 @@
 package com.revature.monster_lab.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "monsters")
 public class Monster {
+	@Id
+	@Column(name="monster_id")
 	private String monsterId;
+	
+	@Column(name = "monster_name", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (monster_name <> '')")
 	private String monsterName;
+	
+	@Column(name = "monster_type", nullable = false, columnDefinition = "VARCHAR CHECK (monster_type <> '')")
 	private String monsterType;
+	
+	@Column(nullable = false)
 	private String strength;
+	
+	@Column(nullable = false)
 	private String dexterity;
+	
+	@Column(nullable = false)
 	private String intelligence;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "creator_id", nullable = false, columnDefinition = "VARCHAR CHECK (creator_id <> '')")
 	private Scientist creator;
 	
+	
+	// @ManyToMany
+	// @JoinTable(name = "monster_fights", joinColumns = @JoinColumn(name = "creator_id"),
+	// inverseJoinColumns = @JoinColumn(name = "monster_id")
 	
 	// Boilerplate 
 	public Monster() {

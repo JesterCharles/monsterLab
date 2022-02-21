@@ -1,17 +1,49 @@
 package com.revature.monster_lab.models;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "scientists")
 public class Scientist implements Serializable {
 	
 	// Attributes/Variables
+	@Id
+	@Column(name="scientist_id")
 	private String scientistId;
+	
+	@Column(name = "first_name", nullable= false, columnDefinition = "VARCHAR CHECK (first_name <> '')")
 	private String firstName;
+	
+	@Column(name = "last_name", nullable= false, columnDefinition = "VARCHAR CHECK (last_name <> '')")
 	private String lastName;
+	
+	@Column(unique = true, nullable= false, columnDefinition = "VARCHAR CHECK (email <> '')")
 	private String email;
+	
+	@Column(unique = true, nullable= false, columnDefinition = "VARCHAR CHECK (username <> '')")
 	private String username;
+	
+	@Column(nullable= false, columnDefinition = "VARCHAR CHECK (password <> '')")
 	private String password;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "accout_type", columnDefinition = "VARCHAR DEFAULT 'LOCKED'")
+	private AccountType accountType;
+	
+	
+	@OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
+	private List<Monster> userMonsters;
 	
 	// Constructor
 	public Scientist() {
@@ -26,7 +58,7 @@ public class Scientist implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
-
+	
 	public Scientist(String scientistId, String firstName, String lastName, String email, String username,
 			String password) {
 		super();
@@ -38,6 +70,20 @@ public class Scientist implements Serializable {
 		this.password = password;
 	}
 
+
+	public Scientist(String scientistId, String firstName, String lastName, String email, String username,
+			String password, AccountType accountType) {
+		super();
+		this.scientistId = scientistId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.accountType = accountType;
+	}
+	
+	
 	// Getters & Setters
 	public String getScientistId() {
 		return scientistId;
@@ -87,6 +133,22 @@ public class Scientist implements Serializable {
 		this.password = password;
 	}
 
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+
+	public List<Monster> getUserMonsters() {
+		return userMonsters;
+	}
+
+	public void setUserMonsters(List<Monster> userMonsters) {
+		this.userMonsters = userMonsters;
+	}
+
 	// Custom Methods
 	public String toFileString() {
 		StringBuilder buildFileString = new StringBuilder();
@@ -106,8 +168,7 @@ public class Scientist implements Serializable {
 		}
 		
 	}
-	
-	// Overrides come last
+
 	@Override
 	public String toString() {
 		return "Scientist [scientistId=" + scientistId + ", firstName=" + firstName + ", lastName=" + lastName
@@ -116,7 +177,7 @@ public class Scientist implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, firstName, lastName, password, scientistId, username);
+		return Objects.hash(email, firstName, lastName, password, scientistId, userMonsters, username);
 	}
 
 	@Override
@@ -130,8 +191,15 @@ public class Scientist implements Serializable {
 		Scientist other = (Scientist) obj;
 		return Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
-				&& Objects.equals(scientistId, other.scientistId) && Objects.equals(username, other.username);
+				&& Objects.equals(scientistId, other.scientistId) && Objects.equals(userMonsters, other.userMonsters)
+				&& Objects.equals(username, other.username);
 	}
 	
+	// Overrides come last
+	
+	
+	public enum AccountType{
+		ADMIN, DEV, BASIC, PREMIUM, LOCKED, BANNED
+	}
 	
 }

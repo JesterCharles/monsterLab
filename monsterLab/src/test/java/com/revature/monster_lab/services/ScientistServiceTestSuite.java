@@ -13,6 +13,7 @@ import com.revature.monster_lab.daos.ScientistDAO;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
+import com.revature.monster_lab.web.dto.ScientistRequest;
 
 
 public class ScientistServiceTestSuite {
@@ -30,7 +31,7 @@ public class ScientistServiceTestSuite {
 	public void test_isScientistValid_returnsTrue_givenValidUser() {
 		
 		// Arrange
-		Scientist validScientist = new Scientist("valid","valid","valid","valid","valid");
+		ScientistRequest validScientist = new ScientistRequest("valid","valid","valid","valid","valid");
 		
 		// Act
 		boolean actualResult = sut.isScientistValid(validScientist);
@@ -44,9 +45,9 @@ public class ScientistServiceTestSuite {
 	public void test_isScientistValid_returnsFalse_givenUserWithFirstName() {
 		
 		// Arrange
-		Scientist invalidScientist1 = new Scientist("","valid","valid","valid","valid");
-		Scientist invalidScientist2 = new Scientist(null,"valid","valid","valid","valid");
-		Scientist invalidScientist3 = new Scientist("         ","valid","valid","valid","valid");
+		ScientistRequest invalidScientist1 = new ScientistRequest("","valid","valid","valid","valid");
+		ScientistRequest invalidScientist2 = new ScientistRequest(null,"valid","valid","valid","valid");
+		ScientistRequest invalidScientist3 = new ScientistRequest("         ","valid","valid","valid","valid");
 		
 		
 		//Act
@@ -65,17 +66,18 @@ public class ScientistServiceTestSuite {
 	@Test
 	public void test_registerScientist_returnsTrue_givenValidScientist() {
 		// Arrange
-		Scientist validScientist = new Scientist("valid","valid","valid","valid","valid");
+		ScientistRequest validScientist = new ScientistRequest("valid","valid","valid","valid","valid");
+		Scientist scientist = new Scientist(validScientist.getFirstName(),validScientist.getLastName(), validScientist.getEmail(), validScientist.getUsername(), validScientist.getPassword());
 		when(mockScientistDAO.findByUsername(validScientist.getUsername())).thenReturn(null);
 		when(mockScientistDAO.findByEmail(validScientist.getEmail())).thenReturn(null);
-		when(mockScientistDAO.create(validScientist)).thenReturn(validScientist);
+		when(mockScientistDAO.create(scientist)).thenReturn(scientist);
 		
 		// Act
-		Scientist actualResult = sut.registerNewScientist(validScientist);
+		boolean actualResult = sut.registerNewScientist(validScientist);
 		
 		// Assert
 		Assert.assertNotNull(actualResult);
-		verify(mockScientistDAO, times(1)).create(validScientist);
+		verify(mockScientistDAO, times(1)).create(scientist);
 	}
 
 	@Test(expected = InvalidRequestException.class)
@@ -87,17 +89,18 @@ public class ScientistServiceTestSuite {
 	public void test_registerScientist_throwsResourcePersistenceException_givenScientistWithTakenUsername() {
 		
 		// Arrange
-		Scientist usernameTakenScientist = new Scientist("valid","valid","valid","valid","valid");
-		when(mockScientistDAO.findByUsername(usernameTakenScientist.getUsername())).thenReturn(usernameTakenScientist);
+		ScientistRequest usernameTakenScientist = new ScientistRequest("valid","valid","valid","valid","valid");
+		Scientist scientist = new Scientist(usernameTakenScientist.getFirstName(),usernameTakenScientist.getLastName(), usernameTakenScientist.getEmail(), usernameTakenScientist.getUsername(), usernameTakenScientist.getPassword());
+		when(mockScientistDAO.findByUsername(usernameTakenScientist.getUsername())).thenReturn(scientist);
 		when(mockScientistDAO.findByEmail(usernameTakenScientist.getEmail())).thenReturn(null);
-		when(mockScientistDAO.create(usernameTakenScientist)).thenReturn(usernameTakenScientist);
+		when(mockScientistDAO.create(scientist)).thenReturn(scientist);
 		
 		// Act
 		try {
 			sut.registerNewScientist(usernameTakenScientist);
 		} finally {
 			// Assert
-			verify(mockScientistDAO, times(0)).create(usernameTakenScientist);
+			verify(mockScientistDAO, times(0)).create(scientist);
 		}
 	}
 		
@@ -105,17 +108,18 @@ public class ScientistServiceTestSuite {
 		public void test_registerScientist_throwsResourcePersistenceException_givenScientistWithTakenEmail() {
 			
 			// Arrange
-			Scientist emailTakenScientist = new Scientist("valid","valid","valid","valid","valid");
+			ScientistRequest emailTakenScientist = new ScientistRequest("valid","valid","valid","valid","valid");
+			Scientist scientist = new Scientist(emailTakenScientist.getFirstName(),emailTakenScientist.getLastName(), emailTakenScientist.getEmail(), emailTakenScientist.getUsername(), emailTakenScientist.getPassword());
 			when(mockScientistDAO.findByUsername(emailTakenScientist.getUsername())).thenReturn(null);
-			when(mockScientistDAO.findByEmail(emailTakenScientist.getEmail())).thenReturn(emailTakenScientist);
-			when(mockScientistDAO.create(emailTakenScientist)).thenReturn(emailTakenScientist);
+			when(mockScientistDAO.findByEmail(emailTakenScientist.getEmail())).thenReturn(scientist);
+			when(mockScientistDAO.create(scientist)).thenReturn(scientist);
 			
 			// Act
 			try {
 				sut.registerNewScientist(emailTakenScientist);
 			} finally {
 				// Assert
-				verify(mockScientistDAO, times(0)).create(emailTakenScientist);
+				verify(mockScientistDAO, times(0)).create(scientist);
 			}
 		
 		

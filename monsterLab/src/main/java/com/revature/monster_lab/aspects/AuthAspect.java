@@ -31,7 +31,7 @@ public class AuthAspect {
     }
 
 
-    @Around("@annotation(com.revature.spring_mvc.web.util.Secured)")
+    @Around("@annotation(com.revature.monster_lab.web.util.SecureEndpoint)")
     public Object secureEndpoints(ProceedingJoinPoint pjp) throws Throwable {
 
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();

@@ -9,10 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Repository;
+
 import com.revature.monster_lab.models.Monster;
 import com.revature.monster_lab.models.Scientist;
-import com.revature.monster_lab.util.datasource.ConnectionFactory;
 
+@Repository
 public class MonsterDAO implements CrudDAO<Monster> {
 
 	// TODO: Implement search by creatorID

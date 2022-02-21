@@ -2,6 +2,8 @@ package com.revature.monster_lab.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.revature.monster_lab.daos.MonsterDAO;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
 import com.revature.monster_lab.exceptions.ResourcePersistenceException;
@@ -9,6 +11,7 @@ import com.revature.monster_lab.models.Monster;
 import com.revature.monster_lab.web.dto.MonsterRequest;
 import com.revature.monster_lab.web.dto.MonsterResponse;
 
+@Service
 public class MonsterService {
 	
 	private final MonsterDAO monsterDAO;
