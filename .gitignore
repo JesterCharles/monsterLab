@@ -5,3 +5,7 @@ resources/
 doc/
 target/
 *.properties
+.classpath
+.idea/
+.project
+.settings/
