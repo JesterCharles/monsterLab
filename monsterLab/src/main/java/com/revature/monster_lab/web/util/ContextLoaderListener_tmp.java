@@ -20,28 +20,28 @@ import com.revature.monster_lab.web.servlets.AuthServlet;
 import com.revature.monster_lab.web.servlets.MonsterServlet;
 
 @WebListener
-public class ContextLoaderListener implements ServletContextListener{
+public class ContextLoaderListener_tmp implements ServletContextListener{
 	
 	private final Logger logger = LogManager.getLogger();
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		logger.info("Application is initiliazing.....");
-		ObjectMapper mapper = new ObjectMapper();
-		
-		ScientistDAO scientistDAO = new ScientistDAO();
-		MonsterDAO monsterDAO = new MonsterDAO();
-		ScientistService scientistService = new ScientistService(scientistDAO);
-		MonsterService monsterService = new MonsterService(monsterDAO, scientistService);
-		
-		MonsterServlet monsterServlet = new MonsterServlet(monsterService, mapper);
-		AuthServlet authServlet = new AuthServlet(scientistService, mapper);
-		
-		ServletContext context = sce.getServletContext();
-		context.addServlet("MonsterServlet", monsterServlet).addMapping("/monsters/*");
-		context.addServlet("AuthServlet", authServlet).addMapping("/auth");
-		
-		logger.info("Application initiliazed!!! We do did it!~WOOO~");
+//		logger.info("Application is initiliazing.....");
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		ScientistDAO scientistDAO = new ScientistDAO();
+//		MonsterDAO monsterDAO = new MonsterDAO();
+//		ScientistService scientistService = new ScientistService(scientistDAO);
+//		MonsterService monsterService = new MonsterService(monsterDAO, scientistService);
+//		
+//		MonsterServlet monsterServlet = new MonsterServlet(monsterService, mapper);
+//		AuthServlet authServlet = new AuthServlet(scientistService, mapper);
+//		
+//		ServletContext context = sce.getServletContext();
+//		context.addServlet("MonsterServlet", monsterServlet).addMapping("/monsters/*");
+//		context.addServlet("AuthServlet", authServlet).addMapping("/auth");
+//		
+//		logger.info("Application initiliazed!!! We do did it!~WOOO~");
 	}
 	
 	@Override
