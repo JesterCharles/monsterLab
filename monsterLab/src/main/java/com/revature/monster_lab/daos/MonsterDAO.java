@@ -22,71 +22,15 @@ public class MonsterDAO implements CrudDAO<Monster> {
 
 	@Override
 	public Monster create(Monster newMonster) {
-		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-			newMonster.setMonsterId(UUID.randomUUID().toString());
-
-			String sql = "insert into monsters (monster_id, monster_name, monster_type, strength, dexterity, intelligence, creator_id) values (?, ?, ?, ?, ?, ?, ?)";
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setString(1, newMonster.getMonsterId());
-			ps.setString(2, newMonster.getMonsterName());
-			ps.setString(3, newMonster.getMonsterType());
-			ps.setString(4, newMonster.getStrength());
-			ps.setString(5, newMonster.getDexterity());
-			ps.setString(6, newMonster.getIntelligence());
-			ps.setString(7, newMonster.getCreator().getScientistId());
-
-			int rowsInserted = ps.executeUpdate();
-
-			if (rowsInserted != 0) {
-				return newMonster;
-			}
-
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		
 
 		return null;
 	}
 
 	@Override
 	public List<Monster> findAll() {
-		List<Monster> monsters = new LinkedList<>();
-		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "select * from monsters m join scientists s on m.creator_id = s.scientist_id";
-			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery(sql);
-
-			while (rs.next()) {
-				Scientist monsterCreator = new Scientist();
-
-				monsterCreator.setScientistId(rs.getString("scientist_id"));
-				monsterCreator.setFirstName(rs.getString("first_name"));
-				monsterCreator.setLastName(rs.getString("last_name"));
-				monsterCreator.setEmail(rs.getString("email"));
-				monsterCreator.setUsername(rs.getString("username"));
-
-				Monster monster = new Monster();
-
-				monster.setMonsterId(rs.getString("monster_id"));
-				monster.setMonsterName(rs.getString("monster_name"));
-				monster.setMonsterType(rs.getString("monster_type"));
-				monster.setStrength(rs.getString("strength"));
-				monster.setDexterity(rs.getString("dexterity"));
-				monster.setIntelligence(rs.getString("intelligence"));
-				monster.setCreator(monsterCreator);
-
-				monsters.add(monster);
-			}
-			 System.out.println("DAO is returning: " + monsters);
-			return monsters;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return monsters;
+		
+		return null;
 	}
 
 	@Override
