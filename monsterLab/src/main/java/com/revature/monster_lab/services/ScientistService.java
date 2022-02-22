@@ -74,8 +74,8 @@ public class ScientistService {
 	}
 	
 	// TODO: refactor to responses
-	public List<ScientistResponse> getAllScientists(){
-		return null;	
+	public List<Scientist> getAllScientists(){
+		return scientistDao.findAll();
 	}
 	
 	//TODO: Impelement authentication
@@ -94,16 +94,15 @@ public class ScientistService {
 		return authenticatedScientist;
 	}
 
-//	public boolean isScientistValid(ScientistRequest newScientist) {
-//		if(newScientist == null) return false;
-//		if(newScientist.getFirstName() == null || newScientist.getFirstName().trim().equals("")) return false;
-//		if(newScientist.getLastName() == null || newScientist.getLastName().trim().equals("")) return false;
-//		if(newScientist.getEmail() == null || newScientist.getEmail().trim().equals("")) return false;
-//		if(newScientist.getUsername() == null || newScientist.getUsername().trim().equals("")) return false;
-//		return newScientist.getPassword() != null && !newScientist.getPassword().trim().equals("");
-//
-//
-//	}
+	@Transactional
+	public boolean isEmailAvailable(String email) {
+		return !scientistDao.findScientistByEmail(email).isPresent();
+	}
+	
+	@Transactional
+	public boolean isUsernameAvailable(String username) {
+		return !scientistDao.findScientistByUsername(username).isPresent();
+	}
 	
 	//Automatic Dirty Checking
 	@Transactional
@@ -138,5 +137,7 @@ public class ScientistService {
 			throw new ResourcePersistenceException("Could not update user due to nest exception", e);
 		}
 	}
+
+	
 	
 }
