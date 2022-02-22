@@ -61,7 +61,7 @@ public class ScientistService {
 		}
 		newScientist.setScientistId(UUID.randomUUID().toString());
 		newScientist.setAccountType(Scientist.AccountType.BASIC);
-		Scientist persistedScientist = scientistDao.create(newScientist);
+		Scientist persistedScientist = scientistDao.save(newScientist);
 		
 		if(persistedScientist == null) {
 			throw new ResourcePersistenceException("The scientist could not be persisted");
@@ -83,7 +83,7 @@ public class ScientistService {
 			throw new InvalidRequestException("Either username or password is an invalid entry. Please try logging in again");
 		}
 		
-		Scientist authenticatedScientist = scientistDao.findByUsernameAndPassword(username, password);
+		Scientist authenticatedScientist = scientistDao.findScientistByUsernameAndPassword(username, password);
 		
 		if(authenticatedScientist == null) {
 			throw new AuthenticationException("Unauthenticated user, information provided was not found in our database.");
@@ -107,7 +107,7 @@ public class ScientistService {
 	public void updateScientist(UpdateScienitstRequest updateScientistRequest) {
 		try {
 			
-			Scientist original = scientistDao.findById(updateScientistRequest.getId());
+			Scientist original = scientistDao.findById(updateScientistRequest.getId()).orElseThrow(ResourceNotFoundException::new);
 
             if (original == null) {
                 throw new ResourceNotFoundException();
