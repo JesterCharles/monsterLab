@@ -1,4 +1,4 @@
-package com.revature.monster_lab.services;
+package com.revature.monster_lab.exceptions;
 
 public class ResourceNotFoundException extends Exception {
 

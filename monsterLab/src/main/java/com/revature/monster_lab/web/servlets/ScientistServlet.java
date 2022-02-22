@@ -1,5 +1,7 @@
 package com.revature.monster_lab.web.servlets;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,7 @@ public class ScientistServlet {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createScientist(@RequestBody ScientistRequest scientistRequest) {
+	public void createScientist(@RequestBody @Valid ScientistRequest scientistRequest) {
 		scientistService.registerNewScientist(scientistRequest);
 	}
 }

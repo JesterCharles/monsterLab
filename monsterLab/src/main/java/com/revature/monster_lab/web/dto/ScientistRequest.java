@@ -2,12 +2,28 @@ package com.revature.monster_lab.web.dto;
 
 import java.util.Objects;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class ScientistRequest {
 
+	@NotBlank
 	private String firstName;
+	
+	@NotBlank
 	private String lastName;
+	
+	@Email
 	private String email;
+	
+	@Size(min = 4, max = 15)
 	private String username;
+	
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", 
+			message = "Passwords msut have a minimum of 8 character, one number, one letter and one special character")
 	private String password;
 
 	public ScientistRequest() {

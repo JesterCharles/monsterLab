@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.monster_lab.daos.ScientistDAO;
 import com.revature.monster_lab.exceptions.AuthenticationException;
 import com.revature.monster_lab.exceptions.InvalidRequestException;
+import com.revature.monster_lab.exceptions.ResourceNotFoundException;
 import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.web.dto.ScientistRequest;
@@ -35,9 +38,9 @@ public class ScientistService {
 	
 	@Transactional
 	public boolean registerNewScientist(ScientistRequest scientistRequest) {
-		if(!isScientistValid(scientistRequest)) {
-			throw new InvalidRequestException("Invalid user data provider");
-		}
+//		if(!isScientistValid(scientistRequest)) {
+//			throw new InvalidRequestException("Invalid user data provider");
+//		}
 		
 		Scientist newScientist = new Scientist(
 				scientistRequest.getFirstName(), 
@@ -91,16 +94,16 @@ public class ScientistService {
 		return authenticatedScientist;
 	}
 
-	public boolean isScientistValid(ScientistRequest newScientist) {
-		if(newScientist == null) return false;
-		if(newScientist.getFirstName() == null || newScientist.getFirstName().trim().equals("")) return false;
-		if(newScientist.getLastName() == null || newScientist.getLastName().trim().equals("")) return false;
-		if(newScientist.getEmail() == null || newScientist.getEmail().trim().equals("")) return false;
-		if(newScientist.getUsername() == null || newScientist.getUsername().trim().equals("")) return false;
-		return newScientist.getPassword() != null && !newScientist.getPassword().trim().equals("");
-
-
-	}
+//	public boolean isScientistValid(ScientistRequest newScientist) {
+//		if(newScientist == null) return false;
+//		if(newScientist.getFirstName() == null || newScientist.getFirstName().trim().equals("")) return false;
+//		if(newScientist.getLastName() == null || newScientist.getLastName().trim().equals("")) return false;
+//		if(newScientist.getEmail() == null || newScientist.getEmail().trim().equals("")) return false;
+//		if(newScientist.getUsername() == null || newScientist.getUsername().trim().equals("")) return false;
+//		return newScientist.getPassword() != null && !newScientist.getPassword().trim().equals("");
+//
+//
+//	}
 	
 	//Automatic Dirty Checking
 	@Transactional
