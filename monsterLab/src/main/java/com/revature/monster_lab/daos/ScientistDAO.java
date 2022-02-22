@@ -27,11 +27,11 @@ public class ScientistDAO implements CrudDAO<Scientist> {
                 .getSingleResult();
 	}
 
-	public Scientist findByEmail(String email) {
+	public Scientist findScientistByEmail(String email) {
 		return null;
 	}
 
-	public Scientist findByUsername(String username) {
+	public Scientist findScientistByUsername(String username) {
 		return null;
 	}
 
@@ -48,7 +48,7 @@ public class ScientistDAO implements CrudDAO<Scientist> {
 
 	@Override
 	public Scientist findById(String id) {
-		return null;
+		return sessionFactory.getCurrentSession().get(Scientist.class, id);
 	}
 
 	@Override

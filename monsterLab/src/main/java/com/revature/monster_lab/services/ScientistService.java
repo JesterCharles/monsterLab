@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import com.revature.monster_lab.exceptions.ResourcePersistenceException;
 import com.revature.monster_lab.models.Scientist;
 import com.revature.monster_lab.web.dto.ScientistRequest;
 import com.revature.monster_lab.web.dto.ScientistResponse;
+import com.revature.monster_lab.web.dto.UpdateScienitstRequest;
 
 
 // THIS IS PURELY BUSINESS LOGIC
@@ -45,8 +47,8 @@ public class ScientistService {
 				scientistRequest.getPassword()
 				);
 
-		boolean usernameAvailable = scientistDao.findByUsername(newScientist.getUsername()) == null;
-		boolean emailAvailable = scientistDao.findByEmail(newScientist.getEmail()) == null;
+		boolean usernameAvailable = scientistDao.findScientistByUsername(newScientist.getUsername()) == null;
+		boolean emailAvailable = scientistDao.findScientistByEmail(newScientist.getEmail()) == null;
 		
 		if(!usernameAvailable || !emailAvailable) {
 			if(!usernameAvailable && emailAvailable) {
@@ -98,6 +100,40 @@ public class ScientistService {
 		return newScientist.getPassword() != null && !newScientist.getPassword().trim().equals("");
 
 
+	}
+	
+	//Automatic Dirty Checking
+	@Transactional
+	public void updateScientist(UpdateScienitstRequest updateScientistRequest) {
+		try {
+			
+			Scientist original = scientistDao.findById(updateScientistRequest.getId());
+
+            if (original == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            Predicate<String> notNullOrEmpty = str -> str != null && !str.equals("");
+
+            if (notNullOrEmpty.test(updateScientistRequest.getFirstName())) {
+                original.setFirstName(updateScientistRequest.getFirstName());
+            } else if (notNullOrEmpty.test(updateScientistRequest.getLastName())) {
+                original.setLastName(updateScientistRequest.getLastName());
+            } else if (notNullOrEmpty.test(updateScientistRequest.getEmail())) {
+                if (scientistDao.findScientistByEmail(updateScientistRequest.getEmail()) != null) {
+                    throw new ResourcePersistenceException("The provided email is already by another user.");
+                }
+                original.setEmail(updateScientistRequest.getEmail());
+            } else if (notNullOrEmpty.test(updateScientistRequest.getPassword())) {
+                original.setPassword(updateScientistRequest.getPassword());
+            }
+
+			
+		} catch (ResourcePersistenceException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new ResourcePersistenceException("Could not update user due to nest exception", e);
+		}
 	}
 	
 }

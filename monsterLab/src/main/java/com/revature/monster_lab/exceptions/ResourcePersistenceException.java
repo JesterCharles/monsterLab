@@ -6,5 +6,11 @@ public class ResourcePersistenceException extends RuntimeException {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
+
+	public ResourcePersistenceException(String message, Throwable cause) {
+		super(message, cause);
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }
