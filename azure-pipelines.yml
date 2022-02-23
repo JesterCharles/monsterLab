@@ -12,7 +12,7 @@ pool:
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: '$(System.DefaultWorkingDirectory)/monsterLab/pom.xml'
+    mavenPomFile: 'monsterLab/pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
@@ -26,4 +26,4 @@ steps:
     mavenPomFile: 'monsterLab/pom.xml'
     goals: 'spring-boot:build-image'
     publishJUnitResults: false
-    jdkVersionOption: '1.11'
+    jdkVersionOption: '1.8'
