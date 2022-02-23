@@ -1,49 +1,44 @@
-//package com.revature.monster_lab.services;
-//
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertNotNull;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.times;
-//import static org.mockito.Mockito.verify;
-//import static org.mockito.Mockito.when;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//
-//import com.revature.monster_lab.daos.ScientistDAO;
-//import com.revature.monster_lab.exceptions.InvalidRequestException;
-//import com.revature.monster_lab.exceptions.ResourcePersistenceException;
-//import com.revature.monster_lab.models.Scientist;
-//import com.revature.monster_lab.web.dto.ScientistRequest;
-//
-//
-//public class ScientistServiceTestSuite {
-//	
-//	ScientistService sut;
-//	ScientistDAO mockScientistDAO;
-//	
-//	@BeforeEach
-//	public void testPrep() {
-//		mockScientistDAO = mock(ScientistDAO.class);
-//		sut = new ScientistService(mockScientistDAO);
-//	}
-//	
-//	@Test
-//	public void test_isScientistValid_returnsTrue_givenValidUser() {
-//		
-//		// Arrange
-//		ScientistRequest validScientist = new ScientistRequest("valid","valid","valid","valid","valid");
-//		
-//		// Act
-//		boolean actualResult = sut.isScientistValid(validScientist);
-//		
-//		// Assert
-//		assertTrue(actualResult);
-//		
-//	}
-//	
+package com.revature.monster_lab.services;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+public class UserControllerIntegrationTest {
+
+    private MockMvc mockMvc;
+    private final WebApplicationContext context;
+    private final ObjectMapper mapper;
+
+    @Autowired
+    public UserControllerIntegrationTest(WebApplicationContext context, ObjectMapper mapper) {
+        this.context = context;
+        this.mapper = mapper;
+    }
+
+    @BeforeEach
+    public void setup() throws Exception {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+    }
+
+    @Test
+    public void test_checkUsernameAvailability_returns204_givenThatProvidedUsernameIsNotTaken() throws Exception {
+        mockMvc.perform(get("/scientists/username?username=totally-not-taken-username"))
+               .andDo(print())
+               .andExpect(status().is(204))
+               .andReturn();
+    }
+	
 //	@Test
 //	public void test_isScientistValid_returnsFalse_givenUserWithFirstName() {
 //		
@@ -128,4 +123,4 @@
 //		
 //		
 //	}
-//}
+}
