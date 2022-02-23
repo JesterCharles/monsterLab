@@ -1,10 +1,6 @@
 # FROM specifies a "base image" that should be used for the image we are about to create
 FROM openjdk:8-jdk-alpine
 
-# Allows us to specify a place on the local machine that container data should be persisted to
-# So that it can be accessed even after the container shuts down (or while its running)
-VOLUME /tmp
-
 # Allows us to provide some value at image build time using the --build-arg flag
 # For instance: docker build --build-arg profile=dev
 ARG profile=local
@@ -24,8 +20,8 @@ COPY target/*.jar monsterLab.jar
 # Used when we run the container
 #                             host:container
 # For instance: docker run -p 8080:3000
-EXPOSE 3000
+EXPOSE 8080
 
 # Allows us to specify a primary command(s) that should be ran to initialize the container
 # You cannot use ARGs in an ENTRYPOINT, only ENVs can be referenced
-ENTRYPOINT [ "sh", "-c", "java -jar -Dspring.profiles.active=${PROFILE} quizzard.jar" ]
+ENTRYPOINT [ "java -jar -Dspring.profiles.active=${PROFILE} monsterLab.jar" ]
