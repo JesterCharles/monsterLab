@@ -21,7 +21,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
     
-- script: ./mvnw package -Pprod -DskipTests
+- script: mvnw package -Pprod -DskipTests
   displayName: 'BUILD: creating production build'
 - task: CopyFiles@2
   inputs:
