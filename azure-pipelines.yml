@@ -33,6 +33,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'monsterLabjesterr'
-    repository: 'monsterlab-tetst'
+    repository: 'monsterlab'
     command: 'push'
     tags: 'latest'
