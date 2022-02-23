@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'd0717d9e-6cea-4e86-825b-3c1e080349b0'
   imageRepository: 'monsterlabdocker'
   containerRegistry: 'monsterlabjesterr.azurecr.io'
-  dockerfilePath: '${Build.SourcesDirectory}/monsterLab/Dockerfile'
+  dockerfilePath: 'monsterLab/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
