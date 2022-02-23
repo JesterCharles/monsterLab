@@ -17,20 +17,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class UserControllerIntegrationTest {
 
-    private MockMvc mockMvc;
-    private final WebApplicationContext context;
-    private final ObjectMapper mapper;
-
-    @Autowired
-    public UserControllerIntegrationTest(WebApplicationContext context, ObjectMapper mapper) {
-        this.context = context;
-        this.mapper = mapper;
-    }
-
-    @BeforeEach
-    public void setup() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-    }
+//    private MockMvc mockMvc;
+//    private final WebApplicationContext context;
+//    private final ObjectMapper mapper;
+//
+//    @Autowired
+//    public UserControllerIntegrationTest(WebApplicationContext context, ObjectMapper mapper) {
+//        this.context = context;
+//        this.mapper = mapper;
+//    }
+//
+//    @BeforeEach
+//    public void setup() throws Exception {
+//        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+//    }
     
     @Test
     public void test_isTrue_returnTrue() {
