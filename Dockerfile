@@ -12,7 +12,7 @@ COPY ./ ./
 
 RUN mvn clean package
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jre-alpine3.9
 
 COPY --from=MAVEN_BUILD /monsterLab/target/monsterLab-0.0.1-SNAPSHOT.jar /monsterLab.jar
 
