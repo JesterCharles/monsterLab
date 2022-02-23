@@ -2,3 +2,10 @@ bin/
 resources/
 .metadata/
 *.class
+doc/
+target/
+*.properties
+.classpath
+.idea/
+.project
+.settings/
