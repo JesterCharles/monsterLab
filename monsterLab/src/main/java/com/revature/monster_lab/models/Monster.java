@@ -15,10 +15,10 @@ public class Monster {
 	@Column(name="monster_id")
 	private String monsterId;
 	
-	@Column(name = "monster_name", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (monster_name <> '')")
+	@Column(name = "monster_name", unique = true, nullable = false)
 	private String monsterName;
 	
-	@Column(name = "monster_type", nullable = false, columnDefinition = "VARCHAR CHECK (monster_type <> '')")
+	@Column(name = "monster_type", nullable = false)
 	private String monsterType;
 	
 	@Column(nullable = false)
@@ -31,7 +31,7 @@ public class Monster {
 	private String intelligence;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "creator_id", nullable = false, columnDefinition = "VARCHAR CHECK (creator_id <> '')")
+	@JoinColumn(name = "scientist_id", nullable = false)
 	private Scientist creator;
 	
 	

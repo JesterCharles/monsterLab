@@ -22,23 +22,23 @@ public class Scientist implements Serializable {
 	@Column(name="scientist_id")
 	private String scientistId;
 	
-	@Column(name = "first_name", nullable= false, columnDefinition = "VARCHAR CHECK (first_name <> '')")
+	@Column(name = "first_name", nullable= false, columnDefinition = "VARCHAR(255) CHECK (first_name <> '')")
 	private String firstName;
 	
-	@Column(name = "last_name", nullable= false, columnDefinition = "VARCHAR CHECK (last_name <> '')")
+	@Column(name = "last_name", nullable= false, columnDefinition = "VARCHAR(255) CHECK (last_name <> '')")
 	private String lastName;
 	
-	@Column(unique = true, nullable= false, columnDefinition = "VARCHAR CHECK (email <> '')")
+	@Column(unique = true, nullable= false, columnDefinition = "VARCHAR(255) CHECK (email <> '')")
 	private String email;
 	
-	@Column(unique = true, nullable= false, columnDefinition = "VARCHAR CHECK (username <> '')")
+	@Column(unique = true, nullable= false, columnDefinition = "VARCHAR(255) CHECK (username <> '')")
 	private String username;
 	
-	@Column(nullable= false, columnDefinition = "VARCHAR CHECK (password <> '')")
+	@Column(nullable= false, columnDefinition = "VARCHAR(255) CHECK (password <> '')")
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "accout_type", columnDefinition = "VARCHAR DEFAULT 'LOCKED'")
+	@Column(name = "account_type", columnDefinition = "VARCHAR(255) DEFAULT 'LOCKED'")
 	private AccountType accountType;
 	
 	

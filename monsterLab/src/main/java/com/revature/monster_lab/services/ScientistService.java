@@ -54,13 +54,11 @@ public class ScientistService {
 		boolean emailAvailable = scientistDao.findScientistByEmail(newScientist.getEmail()) == null;
 		
 		if(!usernameAvailable || !emailAvailable) {
-			if(!usernameAvailable && emailAvailable) {
+			if(emailAvailable) {
 				throw new ResourcePersistenceException("The provided username was already taken in the database");
 			} else if(usernameAvailable) {
 				throw new ResourcePersistenceException("The provided email was already taken in the database");
-			} else {
-				throw new ResourcePersistenceException("The provided username and email were already taken in the database");
-			}
+			} 
 		}
 		newScientist.setScientistId(UUID.randomUUID().toString());
 		newScientist.setAccountType(Scientist.AccountType.BASIC);
